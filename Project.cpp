@@ -12,6 +12,7 @@ class Phong{
     
     public:
         virtual int TienPhong() = 0;
+        virtual void out() = 0;
         void docFile(ifstream &file){
             file >> soPhong;
             file.ignore();
@@ -20,6 +21,7 @@ class Phong{
             getline(file,huongPhong, ',');
             getline(file,dichVu, ',');
             getline(file,chuPhong, ',');
+            file.ignore();
         }
         // void GhiFile(ofstream &file)
         long PhiPhuThu(){
@@ -134,9 +136,10 @@ class QuanLyPhong{
         }
 
         void out(){
-            for(int i = 0; i < qlp.size(); i++)
-                qlp[i]->InThongTin();
+            for(int i = 0; i < qlp.size(); i++){
+                qlp[i]->out();
                 cout << endl;
+            }
         }
 };
 
