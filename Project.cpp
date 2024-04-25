@@ -62,7 +62,8 @@ class SingleBed : public Phong{
     public:
         int TienPhong(){
             int tienPhong = 1000000; // Gia goc cua phong Single Bed
-            return tienPhong + PhiPhuThu();
+            if(tinhTrang == "X") return 0;
+            else return tienPhong + PhiPhuThu();
         }
 
         void out(){
@@ -74,8 +75,9 @@ class SingleBed : public Phong{
 class DoubleBed : public Phong{
     public:
         int TienPhong(){
-            int tienPhong = 2000000; // Gia goc cua phong Single Bed
-            return tienPhong + PhiPhuThu();
+            int tienPhong = 2000000; // Gia goc cua phong Double Bed
+            if(tinhTrang == "X") return 0;
+            else return tienPhong + PhiPhuThu();
         }
 
         void out(){
@@ -87,8 +89,9 @@ class DoubleBed : public Phong{
 class QueenSizeBed : public Phong{
     public:
         int TienPhong(){
-            int tienPhong = 4000000; // Gia goc cua phong Single Bed
-            return tienPhong + PhiPhuThu();
+            int tienPhong = 4000000; // Gia goc cua phong Queen size Bed
+            if(tinhTrang == "X") return 0;
+            else return tienPhong + PhiPhuThu();
         }
 
         void out(){
@@ -100,8 +103,9 @@ class QueenSizeBed : public Phong{
 class KingSizeBed : public Phong{
     public:
         int TienPhong(){
-            int tienPhong = 5500000; // Gia goc cua phong Single Bed
-            return tienPhong + PhiPhuThu();
+            int tienPhong = 5500000; // Gia goc cua phong King size Bed
+            if(tinhTrang == "X") return 0;
+            else return tienPhong + PhiPhuThu();
         }
 
         void out(){
