@@ -244,8 +244,7 @@ class QuanLyPhong{
                         qlp[i]->out();
                         cout << endl;
                     }
-                }
-                    
+                } 
             }
             if(check == "Tinh trang"){
                 qlp[0]->TieuDe();
@@ -274,5 +273,5 @@ int main(){
     ql.NhapThongTin();
     ql.out();
     ql.XuatDanhSach();
-    ql.TimKiemPhong("Tinh trang", "X");
+    ql.TimKiemPhong("Loai phong", "Double bed");
 }
