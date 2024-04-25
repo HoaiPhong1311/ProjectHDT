@@ -1,7 +1,3 @@
-1              Nguyen Van A        0987654321          nguyenvana@gmail.comCN                  K                        2                   0                   
-2              Tran Thi B          0987654322          tranthib@gmail.com  CN                  C                        7                   0                   
-3              Le Thi C            0987654323          lethic@gmail.com    CN                  K                        5                   0                   
-4              Pham Van D          0987654324          phamvand@gmail.com  GD                  K                        6                   2                   
-5              Nguyen Thi E        0987654325          nguyenthi@gmail.com GD                  K                        1                   1                   
-6              Tran Van F          0987654326          tranvanf@gmail.com  GD                  C                        3                   3                   
-7              Banh Van G          0987654327          banhvang@gmail.com  DN                  C                        4                   5                   
+----------------------------------------------------------------------------------------------------------------------------------------
+Ma KH     Ten KH              So dien thoai       Email                    Loai      The TV    Thoi gian o    Nguoi di cung  
+----------------------------------------------------------------------------------------------------------------------------------------

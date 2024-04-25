@@ -73,12 +73,32 @@ class Phong{
             return loai;
         }
 
+        string GetChuPhong(){
+            return chuPhong;
+        }
+
         string GetTinhTrang(){
             return tinhTrang;
         }
 
         string GetHuongPhong(){
             return huongPhong;
+        }
+
+        int GetSoPhong(){
+            return soPhong;
+        }
+
+        void SetDichVu(string dichVu){
+            this->dichVu = dichVu;
+        }
+
+        void SetChuPhong(string chuPhong){
+            this->chuPhong = chuPhong;
+        }
+
+        void SetTinhTrang(string tinhTrang){
+            this->tinhTrang = tinhTrang;
         }
 
         void TieuDe(){
@@ -170,9 +190,108 @@ class KingSizeBed : public Phong{
         }
 };
 
-class QuanLyPhong{
+class KhachHang{
+    protected:
+        int maKh, thoiGian, nguoiDiChung;
+        string ten, dienThoai, email, loai, theThanhVien;
+
+    public:
+        void docFile(ifstream &file){
+            file >> maKh;
+            file.ignore();
+            getline(file,ten, ',');
+            getline(file,dienThoai, ',');
+            getline(file,email, ',');
+            getline(file,loai, ',');
+            getline(file,theThanhVien, ',');
+            file >> thoiGian;
+            file.ignore();
+            file >> nguoiDiChung;
+            file.ignore();
+        }
+
+        void InThongTin(){
+            cout << setw(10) << left << maKh;
+            cout << setw(20) << left << ten;
+            cout << setw(20) << left << dienThoai;
+            cout << setw(25) << left << email;
+            cout << setw(10) << left << loai;
+            cout << setw(10) << left << theThanhVien;
+            cout << setw(15) << left << thoiGian;
+            cout << setw(15) << left << nguoiDiChung;
+        }
+
+        void GhiFile(ofstream &file){
+            file << setw(10) << left << maKh;
+            file << setw(20) << left << ten;
+            file << setw(20) << left << dienThoai;
+            file << setw(25) << left << email;
+            file << setw(10) << left << loai;
+            file << setw(10) << left << theThanhVien;
+            file << setw(15) << left << thoiGian;
+            file << setw(15) << left << nguoiDiChung;
+        }
+
+        void TieuDe(){
+            cout << "----------------------------------------------------------------------------------------------------------------------------------------" << endl;
+            cout << setw(10) << left << "Ma KH";
+            cout << setw(20) << left << "Ten KH";
+            cout << setw(20) << left << "So dien thoai";
+            cout << setw(25) << left << "Email";
+            cout << setw(10) << left << "Loai";
+            cout << setw(10) << left << "The TV";
+            cout << setw(15) << left << "Thoi gian o";
+            cout << setw(15) << left << "Nguoi di cung" << endl;
+            cout << "----------------------------------------------------------------------------------------------------------------------------------------" << endl;
+        }
+
+        int GetMaKh(){
+            return maKh;
+        }
+
+        string GetTen(){
+            return ten;
+        }
+
+        void NhapThongTin(int id, int loai){
+            maKh = id;
+            cout << "Ho ten: ";
+            cin.ignore();
+            getline(cin,ten);
+            cout << "So dien thoai: ";
+            getline(cin,dienThoai);
+            cout << "Email: ";
+            getline(cin,email);
+            if(loai == 1) this->loai = "CN";
+            else if(loai == 2) this->loai = "GD";
+            else this->loai = "DN";
+            cout << "The thanh vien: ";
+            cin >> theThanhVien;
+            cout << "Thoi gian o: ";
+            cin >> thoiGian;
+            cout << "So nguoi di chung: ";
+            cin >> nguoiDiChung;
+        }
+
+};
+
+class CaNhan : public KhachHang{
+    public:
+
+};
+
+class GiaDinh : public KhachHang{
+
+};
+
+class DoanhNghiep : public KhachHang{
+
+};
+
+class QuanLyPhongVaKhach{
     private:
         vector <Phong*> qlp;
+        vector <KhachHang*> kh;
 
     public:
         void NhapThongTin(){
@@ -271,15 +390,171 @@ class QuanLyPhong{
                 system("pause");
             }
         }
+
+        void NhapThongTinKhachHang(){
+            ifstream file;
+			file.open("Guest.csv");
+
+            if(file.is_open()){
+				int tong, n, m, k;
+				file >> tong;
+                kh.resize(tong);
+                file >> n; file >> m; file >> k;
+                file.ignore(2, '\n');
+                for(int i = 0; i < n; i++)
+                    kh[i] = new CaNhan();
+                for(int i = n; i < n + m; i++)
+                    kh[i] = new GiaDinh();
+                for(int i = n + m; i < n + m + k; i++)
+                    kh[i] = new DoanhNghiep();
+                for(int i = 0; i < kh.size(); i++)
+                    kh[i]->docFile(file);
+				file.close();
+				cout << "Doc file thanh cong \n";
+			}
+			else cout << "File khong mo duoc\n";
+        }
+
+        void outKhachHang(){
+            kh[0]->TieuDe();
+            for(int i = 0; i < kh.size(); i++){
+                kh[i]->InThongTin();
+                cout << endl;
+            }
+            cout << "----------------------------------------------------------------------------------------------------------------------------------------" << endl;
+            system("pause");
+        }
+
+        void XuatDanhSachKhachHang(){
+			ofstream file;
+			
+			file.open("Guest.txt");
+
+			if(file.is_open()){
+                file << "----------------------------------------------------------------------------------------------------------------------------------------" << endl;
+                file << setw(10) << left << "Ma KH";
+                file << setw(20) << left << "Ten KH";
+                file << setw(20) << left << "So dien thoai";
+                file << setw(25) << left << "Email";
+                file << setw(10) << left << "Loai";
+                file << setw(10) << left << "The TV";
+                file << setw(15) << left << "Thoi gian o";
+                file << setw(15) << left << "Nguoi di cung" << endl;
+				for(int i = 0; i < kh.size(); i++){
+					kh[i]->GhiFile(file);
+                    file << endl;
+				}
+                file << "----------------------------------------------------------------------------------------------------------------------------------------" << endl;
+				file.close();
+				cout << "Ghi file thanh cong" << endl;
+			}
+			else cout << "File khong mo duoc" << endl;
+		}
+
+        void ThemKhachHang(int loai){
+            KhachHang* khachHang;
+
+            if(loai == 1) khachHang = new CaNhan();
+            else if(loai == 2) khachHang = new GiaDinh();
+            else khachHang = new DoanhNghiep();
+
+            khachHang->NhapThongTin(kh[kh.size() - 1]->GetMaKh() + 1, loai);
+
+            kh.push_back(khachHang);
+        }
+        
+        void ThemKhachHangVaoPhong(){
+            system("cls");
+            NhapThongTin();
+            cout << "Cac phong con trong" << endl;
+            TimKiemPhong(2, "X");
+
+            int id;
+            cout << "Chon so phong di ma : ";
+            cin >> id;
+
+            for(int i = 0; i < qlp.size(); i++){
+                if(qlp[i]->GetSoPhong() == id){
+                    qlp[i]->SetTinhTrang("Da dat");
+
+                    system("cls");
+                    cout << "==== Chon dich vu ===" << endl;
+                    cout << "1. Khong" << endl;
+        		    cout << "2. An uong" << endl;
+        		    cout << "3. Don dep" << endl;
+                    cout << "4. Giat ui" << endl;
+                    cout << "5. Tron goi" << endl;
+                    cout << "=====================" << endl;
+                    cout << "Nhap lua chon cua ban: ";
+
+                    int luaChon;
+                    cin >> luaChon;
+
+                    if(luaChon == 2) qlp[i]->SetDichVu("An uong");
+                    else if(luaChon == 3) qlp[i]->SetDichVu("Don dep");
+                    else if(luaChon == 4) qlp[i]->SetDichVu("Giat ui");
+                    else if(luaChon == 5) qlp[i]->SetDichVu("Tron goi");
+
+                    int loai;
+                    cout << "=== Chon loai khach hang ===" << endl;
+                    cout << "1. Ca nhan" << endl;
+                    cout << "2. Gia dinh" << endl;
+                    cout << "3. Doanh nghiep" << endl;
+                    cout << "============================" << endl;
+                    cout << "Nhap lua chon cua ban: ";
+
+                    cin >> loai;
+                    if(loai != 1 && loai != 2 && loai != 3){
+                        cout << "Loai khach hang khong hop le!" << endl;
+                        break;
+                    }
+                    ThemKhachHang(loai);
+
+                    qlp[i]->SetChuPhong(kh[kh.size() - 1]->GetTen());
+       
+                    cout << "Da them khach hang thanh cong!" << endl;
+                }
+            }
+        }
+
+        void XoaKhachHang(){
+            system("cls");
+            cout << "Danh sach khach hang" << endl;
+            outKhachHang();
+            cout << "Nhap id khach hang muon xoa: ";
+            int id;
+            cin >> id;
+
+            string name;
+            for(int i = 0; i < kh.size(); i++){
+                if(kh[i]->GetMaKh() == id){
+                    name = kh[i]->GetTen();
+                    delete kh[i];
+                    kh.erase(kh.begin() + i);
+                } 
+            }
+
+            for(int i = 0; i < qlp.size(); i++){
+                if(qlp[i]->GetChuPhong() == name){
+                    cout << qlp[i]->GetChuPhong();
+                }
+            }
+            //         qlp[i]->SetTinhTrang("X");
+            //         qlp[i]->SetDichVu("X");
+            //         qlp[i]->SetChuPhong("X");
+            //     }
+            // } 
+            //out();
+        // }
+        }
 };
 
-class MenuPhong{
+class MenuPhongVaKhach{
     private:
-        QuanLyPhong qlp;
+        QuanLyPhongVaKhach qlp;
     
     public:
-        void HienThiMenu() {
-
+        void HienThiMenuPhong() {
             int luaChon;
 
             do{
@@ -464,128 +739,68 @@ class MenuPhong{
                 cout << endl;
             } while(luaChon != 5);
         }
-};
 
-class KhachHang{
-    protected:
-        int maKh, thoiGian, nguoiDiChung;
-        string ten, dienThoai, email, loai, theThanhVien;
+        void HienThiMenuKhach(){
+            int luaChon;
 
-    public:
-        void docFile(ifstream &file){
-            file >> maKh;
-            file.ignore();
-            getline(file,ten, ',');
-            getline(file,dienThoai, ',');
-            getline(file,email, ',');
-            getline(file,loai, ',');
-            getline(file,theThanhVien, ',');
-            file >> thoiGian;
-            file.ignore();
-            file >> nguoiDiChung;
-            file.ignore();
-        }
+            do{
+                cout << "========== MENU ==========" << endl;
+        		cout << "1. Doc danh sach khach hang" << endl;
+        		cout << "2. In danh sach khach hang" << endl;
+        		cout << "3. Xuat danh sach khach hang" << endl;
+                cout << "4. Them khach hang" << endl;
+                cout << "5. Xoa khach hang" << endl;
+        		cout << "6. Thoat" << endl;
+        		cout << "==========================" << endl;
+                cout << "Nhap lua chon cua ban: ";
 
-        void InThongTin(){
-            cout << setw(15) << left << maKh;
-            cout << setw(20) << left << ten;
-            cout << setw(20) << left << dienThoai;
-            cout << setw(20) << left << email;
-            cout << setw(20) << left << loai;
-            cout << setw(25) << left << theThanhVien;
-            cout << setw(20) << left << thoiGian;
-            cout << setw(20) << left << nguoiDiChung;
-        }
+                cin >> luaChon;
+        		switch(luaChon){
+                    case 1: {
+                        system("cls");
+                        qlp.NhapThongTinKhachHang();
+                        break;
+                    }
 
-        void GhiFile(ofstream &file){
-            file << setw(15) << left << maKh;
-            file << setw(20) << left << ten;
-            file << setw(20) << left << dienThoai;
-            file << setw(20) << left << email;
-            file << setw(20) << left << loai;
-            file << setw(25) << left << theThanhVien;
-            file << setw(20) << left << thoiGian;
-            file << setw(20) << left << nguoiDiChung;
-        }
+                    case 2: {
+                        system("cls");
+                        qlp.outKhachHang();
+                        system("cls");
+                        break;
+                    }
 
-};
+                    case 3: {
+                        system("cls");
+                        qlp.XuatDanhSachKhachHang();
+                        break;
+                    }
 
-class CaNhan : public KhachHang{
-    public:
+                    case 4:{
+                        system("cls");
+                        qlp.ThemKhachHangVaoPhong();
+                        break;
+                    }
 
-};
+                    case 5:
+                        system("cls");
+                        qlp.XoaKhachHang();
+                        break;
 
-class GiaDinh : public KhachHang{
+                    case 6:
+                        cout << "Chuong trinh ket thuc!" << endl;
+                        break;
 
-};
-
-class DoanhNghiep : public KhachHang{
-
-};
-
-class QuanLyKhachHang{
-    private:
-        vector <KhachHang*> kh;
-
-    public:
-        void NhapThongTin(){
-            ifstream file;
-			file.open("Guest.csv");
-
-            if(file.is_open()){
-				int tong, n, m, k;
-				file >> tong;
-                kh.resize(tong);
-                file >> n; file >> m; file >> k;
-                file.ignore(2, '\n');
-                for(int i = 0; i < n; i++)
-                    kh[i] = new CaNhan();
-                for(int i = n; i < n + m; i++)
-                    kh[i] = new GiaDinh();
-                for(int i = n + m; i < n + m + k; i++)
-                    kh[i] = new DoanhNghiep();
-                for(int i = 0; i < kh.size(); i++)
-                    kh[i]->docFile(file);
-				file.close();
-				cout << "Doc file thanh cong \n";
-			}
-			else cout << "File khong mo duoc\n";
-        }
-
-        void out(){
-            //qlp[0]->TieuDe();
-            for(int i = 0; i < kh.size(); i++){
-                kh[i]->InThongTin();
+                    default:
+                        cout << "Lua chon khong hop le!" << endl;
+                        break;
+                }
                 cout << endl;
-            }
-            //cout << "----------------------------------------------------------------------------------------------------------------------------------------" << endl;
-            //system("pause");
+            } while(luaChon != 6);
         }
-
-        void XuatDanhSach(){
-			ofstream file;
-			
-			file.open("Guest.txt");
-
-			if(file.is_open()){
-				for(int i = 0; i < kh.size(); i++){
-					kh[i]->GhiFile(file);
-                    file << endl;
-				}
-				file.close();
-				cout << "Ghi file thanh cong" << endl;
-			}
-			else cout << "File khong mo duoc" << endl;
-		}
 };
 
 int main(){
     system("cls");
-    //MenuPhong qlp;
-    //qlp.HienThiMenu();
-
-    QuanLyKhachHang kh;
-    kh.NhapThongTin();
-    kh.out();
-    kh.XuatDanhSach();
+    MenuPhongVaKhach qlp;
+    qlp.HienThiMenuKhach();
 }
