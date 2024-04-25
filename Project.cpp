@@ -208,6 +208,7 @@ class QuanLyPhong{
                 cout << endl;
             }
             cout << "----------------------------------------------------------------------------------------------------------------------------------------" << endl;
+            system("pause");
         }
 
         void XuatDanhSach(){
@@ -236,8 +237,9 @@ class QuanLyPhong{
 			else cout << "\nFile khong mo duoc" << endl;
 		}
 
-        void TimKiemPhong(string check, string name){
-            if(check == "Loai phong"){
+        void TimKiemPhong(int check, string name){
+            system("cls");
+            if(check == 1){ // Loai phong
                 qlp[0]->TieuDe();
                 for(int i = 0; i < qlp.size(); i++){
                     if(qlp[i]->GetLoai() == name){
@@ -245,9 +247,11 @@ class QuanLyPhong{
                         cout << endl;
                     }
                 }
+                system("pause");
                     
             }
-            if(check == "Tinh trang"){
+
+            if(check == 2){ // Tinh trang
                 qlp[0]->TieuDe();
                 for(int i = 0; i < qlp.size(); i++){
                     if(qlp[i]->GetTinhTrang() == name){
@@ -255,8 +259,9 @@ class QuanLyPhong{
                         cout << endl;
                     }
                 }
+                system("pause");
             }
-            if(check == "Huong phong"){
+            if(check == 3){ // huong phong
                 qlp[0]->TieuDe();
                 for(int i = 0; i < qlp.size(); i++){
                     if(qlp[i]->GetHuongPhong() == name){
@@ -264,15 +269,189 @@ class QuanLyPhong{
                         cout << endl;
                     }
                 }
+                system("pause");
             }
+        }
+};
+
+class MenuPhong{
+    private:
+        QuanLyPhong qlp;
+    
+    public:
+        void HienThiMenu() {
+
+            int luaChon;
+
+            do{
+                cout << "========== MENU ==========" << endl;
+        		cout << "1. Doc danh sach phong" << endl;
+        		cout << "2. In danh sach phong" << endl;
+        		cout << "3. Xuat danh sach phong" << endl;
+                cout << "4. Tim kiem phong" << endl;
+        		cout << "5. Thoat" << endl;
+        		cout << "==========================" << endl;
+                cout << "Nhap lua chon cua ban: ";
+
+                cin >> luaChon;
+        		switch(luaChon){
+                    case 1: {
+                        system("cls");
+                        qlp.NhapThongTin();
+                        break;
+                    }
+
+                    case 2: {
+                        system("cls");
+                        qlp.out();
+                        system("cls");
+                        break;
+                    }
+
+
+                    case 3: {
+                        system("cls");
+                        qlp.XuatDanhSach();
+                        break;
+                    }
+
+                    case 4: {
+                        system("cls");
+                        int timKiem;
+                            cout << "Tim kiem phong theo :" << endl;
+                            cout << "1. Loai Phong" << endl;
+        		            cout << "2. Tinh trang" << endl;
+        		            cout << "3. Huong phong" << endl;
+
+                            cin >> timKiem;
+                            switch(timKiem) {
+                                case 1: {
+                                    system("cls");
+                                    int loaiPhong;
+                                    cout << "1. Single Bed" << endl;
+        		                    cout << "2. Double Bed" << endl;
+        		                    cout << "3. Queen Size Bed" << endl;
+                                    cout << "4. King Size Bed" << endl;
+
+                                    cin >> loaiPhong;
+
+                                    switch(loaiPhong) {
+                                        case 1:
+                                            qlp.TimKiemPhong(1, "Single bed");
+                                            system("cls");
+                                            break;
+                                        
+                                        case 2:
+                                            qlp.TimKiemPhong(1, "Double bed");
+                                            system("cls");
+                                            break;
+                                        
+                                        case 3:
+                                            qlp.TimKiemPhong(1, "Queen size bed");
+                                            system("cls");
+                                            break;
+                                        
+                                        case 4:
+                                            qlp.TimKiemPhong(1, "King size bed");
+                                            system("cls");
+                                            break;
+                                        
+                                        default:
+                                            cout << "Khong hop le !!!";
+                                            system("cls");
+                                            break;
+                                    }
+                                }
+                                break;
+
+                                case 2: {
+                                    system("cls");
+                                    int tinhTrang;
+                                    cout << "1. Phong trong" << endl;
+                                    cout << "2. Da dat" << endl;
+                                    cout << "3. Dang su dung" << endl;
+
+                                    cin >> tinhTrang;
+                                    switch(tinhTrang) {
+                                        case 1:
+                                            qlp.TimKiemPhong(2, "X");
+                                            system("cls");
+                                            break;
+
+                                        case 2:
+                                            qlp.TimKiemPhong(2, "Da dat");
+                                            system("cls");
+                                            break;
+
+                                        case 3:
+                                            qlp.TimKiemPhong(2, "Dang su dung");
+                                            system("cls");
+                                            break;
+                                        
+                                        default:
+                                            cout << "Khong hop le !!!";
+                                            system("cls");
+                                            break;
+                                    }
+                                }
+                                break;
+
+                                case 3: {
+                                    system("cls");
+                                    int huongPhong;
+                                    cout << "1. Tieu chuan" << endl;
+                                    cout << "2. Huong nui" << endl;
+                                    cout << "3. Huong bien" << endl;
+
+                                    cin >> huongPhong;
+
+                                    switch(huongPhong) {
+                                        case 1:
+                                            qlp.TimKiemPhong(3, "Tieu chuan");
+                                            system("cls");
+                                            break;
+                                        
+                                        case 2:
+                                            qlp.TimKiemPhong(3, "Huong nui");
+                                            system("cls");
+                                            break;
+
+                                        case 3:
+                                            qlp.TimKiemPhong(3, "Huong bien");
+                                            system("cls");
+                                            break;
+
+                                        default:
+                                            cout << "Khong hop le !!!";
+                                            system("cls");
+                                            break;
+                                    }
+                                }
+                                break;
+
+                                default:
+                                    cout << "Khong hop le !!!";
+                                    system("cls");
+                                    break;
+                            }
+                    }
+                    break;
+
+                    case 5:
+                        cout << "Chuong trinh ket thuc!" << endl;
+                        break;
+
+                    default:
+                        cout << "Lua chon khong hop le!" << endl;
+                        break;
+                }
+                cout << endl;
+            } while(luaChon != 5);
         }
 };
 
 int main(){
     system("cls");
-    QuanLyPhong ql;
-    ql.NhapThongTin();
-    ql.out();
-    ql.XuatDanhSach();
-    ql.TimKiemPhong("Tinh trang", "X");
+    MenuPhong qlp;
+    qlp.HienThiMenu();
 }
