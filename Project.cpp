@@ -273,25 +273,54 @@ class KhachHang{
             cin >> nguoiDiChung;
         }
 
+        virtual int PhiDiKem() = 0;
+
+        int GetThoiGian(){
+            return thoiGian;
+        }
 };
 
 class CaNhan : public KhachHang{
     public:
-
+        int PhiDiKem(){
+            return 0;
+        }
 };
 
 class GiaDinh : public KhachHang{
-
+    public:
+        int PhiDiKem(){
+            return 100000 * nguoiDiChung;
+        }
 };
 
 class DoanhNghiep : public KhachHang{
+    public:
+        int PhiDiKem(){
+            return 150000 * nguoiDiChung;
+        }
+};
 
+class HoaDon{
+    private:
+        int maPhong, tongTien = 0;
+        string tenKhachHang;
+
+    public:
+        void SetTongTien(int tongTien){
+            this->tongTien = tongTien;
+        }
+
+        int GetTongTien(){
+            return tongTien;
+        }
 };
 
 class QuanLyPhongVaKhach{
     private:
         vector <Phong*> qlp;
         vector <KhachHang*> kh;
+        HoaDon hd;
 
     public:
         void NhapThongTin(){
@@ -518,6 +547,7 @@ class QuanLyPhongVaKhach{
         }
 
         void XoaKhachHang(){
+            NhapThongTin();
             system("cls");
             cout << "Danh sach khach hang" << endl;
             outKhachHang();
@@ -536,16 +566,17 @@ class QuanLyPhongVaKhach{
 
             for(int i = 0; i < qlp.size(); i++){
                 if(qlp[i]->GetChuPhong() == name){
-                    cout << qlp[i]->GetChuPhong();
+                    qlp[i]->SetTinhTrang("X");
+                    qlp[i]->SetDichVu("X");
+                    qlp[i]->SetChuPhong("X");
                 }
             }
-            //         qlp[i]->SetTinhTrang("X");
-            //         qlp[i]->SetDichVu("X");
-            //         qlp[i]->SetChuPhong("X");
-            //     }
-            // } 
-            //out();
-        // }
+
+        }
+
+        void TinhTongChiPhi(){
+            hd.SetTongTien((qlp[1]->TienPhong() + kh[1]->PhiDiKem()) * kh[1]->GetThoiGian());
+            cout << hd.GetTongTien();
         }
 };
 
@@ -797,10 +828,51 @@ class MenuPhongVaKhach{
                 cout << endl;
             } while(luaChon != 6);
         }
+
+        void MenuTong(){
+            int luaChon;
+
+            do{
+                cout << "========== MENU ==========" << endl;
+        		cout << "1. Thao tac voi phong" << endl;
+        		cout << "2. Thao tac voi khach hang" << endl;
+        		cout << "3. Thoat" << endl;
+        		cout << "==========================" << endl;
+                cout << "Nhap lua chon cua ban: ";
+
+                cin >> luaChon;
+        		switch(luaChon){
+                    case 1: {
+                        system("cls");
+                        HienThiMenuPhong();
+                        break;
+                    }
+
+                    case 2: {
+                        system("cls");
+                        HienThiMenuKhach();
+                        break;
+                    }
+
+                    case 3:
+                        cout << "Chuong trinh ket thuc!" << endl;
+                        break;
+
+                    default:
+                        cout << "Lua chon khong hop le!" << endl;
+                        break;
+                }
+                cout << endl;
+            } while(luaChon != 3);
+        }
 };
 
 int main(){
     system("cls");
-    MenuPhongVaKhach qlp;
-    qlp.HienThiMenuKhach();
+    // MenuPhongVaKhach menu;
+    // menu.MenuTong();
+    QuanLyPhongVaKhach ql;
+    ql.NhapThongTin();
+    ql.NhapThongTinKhachHang();
+    ql.TinhTongChiPhi();
 }
