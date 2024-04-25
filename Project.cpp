@@ -49,7 +49,8 @@ class Phong{
 
         void InThongTin(){
             //cout << soPhong << "\t" << loai << "\t" << tinhTrang << "\t" << huongPhong << "\t" << dichVu << "\t" << chuPhong << "\t";
-            cout << setw(10) << left << soPhong;
+
+            cout << setw(15) << left << soPhong;
             cout << setw(20) << left << loai;
             cout << setw(20) << left << tinhTrang;
             cout << setw(20) << left << huongPhong;
@@ -68,7 +69,7 @@ class SingleBed : public Phong{
 
         void out(){
             InThongTin();
-            cout << TienPhong();
+            cout << TienPhong() << " VND";
         }
 };
 
@@ -82,7 +83,7 @@ class DoubleBed : public Phong{
 
         void out(){
             InThongTin();
-            cout << TienPhong();
+            cout << TienPhong() << " VND";
         }
 };
 
@@ -96,7 +97,7 @@ class QueenSizeBed : public Phong{
 
         void out(){
             InThongTin();
-            cout << TienPhong();
+            cout << TienPhong() << " VND";
         }
 };
 
@@ -110,7 +111,7 @@ class KingSizeBed : public Phong{
 
         void out(){
             InThongTin();
-            cout << TienPhong();
+            cout << TienPhong() << " VND";
         }
 };
 
@@ -146,10 +147,20 @@ class QuanLyPhong{
         }
 
         void out(){
+            cout << "----------------------------------------------------------------------------------------------------------------------------------------" << endl;
+            cout << setw(15) << left << "So phong";
+            cout << setw(20) << left << "Loai phong";
+            cout << setw(20) << left << "Tinh trang";
+            cout << setw(20) << left << "Huong phong";
+            cout << setw(20) << left << "Dich vu";
+            cout << setw(25) << left << "Chu phong";
+            cout << setw(20) << left << "Tien phong" << endl;
+            cout << "----------------------------------------------------------------------------------------------------------------------------------------" << endl;
             for(int i = 0; i < qlp.size(); i++){
                 qlp[i]->out();
                 cout << endl;
             }
+            cout << "----------------------------------------------------------------------------------------------------------------------------------------" << endl;
         }
 };
 
