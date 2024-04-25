@@ -12,7 +12,11 @@ class Phong{
     
     public:
         virtual int TienPhong() = 0;
+
         virtual void out() = 0;
+
+        virtual void XuatFile(ofstream &file) = 0;
+
         void docFile(ifstream &file){
             file >> soPhong;
             file.ignore();
@@ -23,16 +27,25 @@ class Phong{
             getline(file,chuPhong, ',');
             file.ignore();
         }
-        // void GhiFile(ofstream &file)
+
+        void GhiFile(ofstream &file){
+            file << setw(15) << left << soPhong;
+            file << setw(20) << left << loai;
+            file << setw(20) << left << tinhTrang;
+            file << setw(20) << left << huongPhong;
+            file << setw(20) << left << dichVu;
+            file << setw(25) << left << chuPhong;
+        }
+
         long PhiPhuThu(){
             int soTien = 0;
             const int HUONG_NUI = 500000;
             const int HUONG_BIEN = 750000;
-            const int HUONG_THUONG = 0;
+            const int TIEU_CHUAN = 0;
 
             if(huongPhong == "Huong nui") soTien = HUONG_NUI;
             else if(huongPhong == "Huong bien") soTien = HUONG_BIEN;
-            else soTien = HUONG_THUONG;
+            else soTien = TIEU_CHUAN;
 
             const int AN_UONG = 750000;
             const int DON_DEP = 200000;
@@ -48,14 +61,36 @@ class Phong{
         }
 
         void InThongTin(){
-            //cout << soPhong << "\t" << loai << "\t" << tinhTrang << "\t" << huongPhong << "\t" << dichVu << "\t" << chuPhong << "\t";
-
             cout << setw(15) << left << soPhong;
             cout << setw(20) << left << loai;
             cout << setw(20) << left << tinhTrang;
             cout << setw(20) << left << huongPhong;
             cout << setw(20) << left << dichVu;
             cout << setw(25) << left << chuPhong;
+        }
+
+        string GetLoai(){
+            return loai;
+        }
+
+        string GetTinhTrang(){
+            return tinhTrang;
+        }
+
+        string GetHuongPhong(){
+            return huongPhong;
+        }
+
+        void TieuDe(){
+            cout << "----------------------------------------------------------------------------------------------------------------------------------------" << endl;
+            cout << setw(15) << left << "So phong";
+            cout << setw(20) << left << "Loai phong";
+            cout << setw(20) << left << "Tinh trang";
+            cout << setw(20) << left << "Huong phong";
+            cout << setw(20) << left << "Dich vu";
+            cout << setw(25) << left << "Chu phong";
+            cout << setw(20) << left << "Tien phong" << endl;
+            cout << "----------------------------------------------------------------------------------------------------------------------------------------" << endl;
         }
 };
 
@@ -71,6 +106,11 @@ class SingleBed : public Phong{
             InThongTin();
             cout << TienPhong() << " VND";
         }
+
+        void XuatFile(ofstream &file){
+            GhiFile(file);
+            file << TienPhong() << " VND";
+        }
 };
 
 class DoubleBed : public Phong{
@@ -84,6 +124,11 @@ class DoubleBed : public Phong{
         void out(){
             InThongTin();
             cout << TienPhong() << " VND";
+        }
+
+        void XuatFile(ofstream &file){
+            GhiFile(file);
+            file << TienPhong() << " VND";
         }
 };
 
@@ -99,6 +144,11 @@ class QueenSizeBed : public Phong{
             InThongTin();
             cout << TienPhong() << " VND";
         }
+
+        void XuatFile(ofstream &file){
+            GhiFile(file);
+            file << TienPhong() << " VND";
+        }
 };
 
 class KingSizeBed : public Phong{
@@ -112,6 +162,11 @@ class KingSizeBed : public Phong{
         void out(){
             InThongTin();
             cout << TienPhong() << " VND";
+        }
+
+        void XuatFile(ofstream &file){
+            GhiFile(file);
+            file << TienPhong() << " VND";
         }
 };
 
@@ -147,20 +202,69 @@ class QuanLyPhong{
         }
 
         void out(){
-            cout << "----------------------------------------------------------------------------------------------------------------------------------------" << endl;
-            cout << setw(15) << left << "So phong";
-            cout << setw(20) << left << "Loai phong";
-            cout << setw(20) << left << "Tinh trang";
-            cout << setw(20) << left << "Huong phong";
-            cout << setw(20) << left << "Dich vu";
-            cout << setw(25) << left << "Chu phong";
-            cout << setw(20) << left << "Tien phong" << endl;
-            cout << "----------------------------------------------------------------------------------------------------------------------------------------" << endl;
+            qlp[0]->TieuDe();
             for(int i = 0; i < qlp.size(); i++){
                 qlp[i]->out();
                 cout << endl;
             }
             cout << "----------------------------------------------------------------------------------------------------------------------------------------" << endl;
+        }
+
+        void XuatDanhSach(){
+			ofstream file;
+			
+			file.open("Room.txt");
+
+			if(file.is_open()){
+				file << "----------------------------------------------------------------------------------------------------------------------------------------" << endl;
+                file << setw(15) << left << "So phong";
+                file << setw(20) << left << "Loai phong";
+                file << setw(20) << left << "Tinh trang";
+                file << setw(20) << left << "Huong phong";
+                file << setw(20) << left << "Dich vu";
+                file << setw(25) << left << "Chu phong";
+                file << setw(20) << left << "Tien phong" << endl;
+                file << "----------------------------------------------------------------------------------------------------------------------------------------" << endl;
+				for(int i = 0; i < qlp.size(); i++){
+					qlp[i]->XuatFile(file);
+                    file << endl;
+				}
+                file << "----------------------------------------------------------------------------------------------------------------------------------------" << endl;
+				file.close();
+				cout << "\nGhi file thanh cong" << endl;
+			}
+			else cout << "\nFile khong mo duoc" << endl;
+		}
+
+        void TimKiemPhong(string check, string name){
+            if(check == "Loai phong"){
+                qlp[0]->TieuDe();
+                for(int i = 0; i < qlp.size(); i++){
+                    if(qlp[i]->GetLoai() == name){
+                        qlp[i]->out();
+                        cout << endl;
+                    }
+                }
+                    
+            }
+            if(check == "Tinh trang"){
+                qlp[0]->TieuDe();
+                for(int i = 0; i < qlp.size(); i++){
+                    if(qlp[i]->GetTinhTrang() == name){
+                        qlp[i]->out();
+                        cout << endl;
+                    }
+                }
+            }
+            if(check == "Huong phong"){
+                qlp[0]->TieuDe();
+                for(int i = 0; i < qlp.size(); i++){
+                    if(qlp[i]->GetHuongPhong() == name){
+                        qlp[i]->out();
+                        cout << endl;
+                    }
+                }
+            }
         }
 };
 
@@ -169,4 +273,6 @@ int main(){
     QuanLyPhong ql;
     ql.NhapThongTin();
     ql.out();
+    ql.XuatDanhSach();
+    ql.TimKiemPhong("Tinh trang", "X");
 }

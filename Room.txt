@@ -1,0 +1,19 @@
+----------------------------------------------------------------------------------------------------------------------------------------
+So phong       Loai phong          Tinh trang          Huong phong         Dich vu             Chu phong                Tien phong          
+----------------------------------------------------------------------------------------------------------------------------------------
+1              Single bed          Dang su dung        Tieu chuan          An uong             Nguyen Van A             1750000 VND
+2              Single bed          Dang su dung        Tieu chuan          Tron goi            Tran Thi B               2000000 VND
+3              Single bed          X                   Huong nui           X                   X                        0 VND
+4              Single bed          X                   Huong bien          X                   X                        0 VND
+5              Double bed          Dang su dung        Tieu chuan          Don dep             Le Thi C                 2200000 VND
+6              Double bed          Da dat              Tieu chuan          Tron goi            Pham Van D               3000000 VND
+7              Double bed          Da dat              Huong nui           Don dep             Nguyen Thi E             2700000 VND
+8              Double bed          X                   Huong bien          X                   X                        0 VND
+9              Double bed          X                   Huong bien          X                   X                        0 VND
+10             Queen size bed      Dang su dung        Huong nui           Tron goi            Tran Van F               5500000 VND
+11             Queen size bed      X                   Huong bien          X                   X                        0 VND
+12             Queen size bed      X                   Huong bien          X                   X                        0 VND
+13             King size bed       Da dat              Huong nui           Tron goi            Banh Van G               7000000 VND
+14             King size bed       X                   Huong nui           X                   X                        0 VND
+15             King size bed       X                   Huong bien          X                   X                        0 VND
+----------------------------------------------------------------------------------------------------------------------------------------

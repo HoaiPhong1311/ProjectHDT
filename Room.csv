@@ -3,12 +3,12 @@
 5
 3
 3,
-1,Single bed,Dang su dung,X,An uong,Nguyen Van A,
-2,Single bed,Dang su dung,X,Tron goi,Tran Thi B,
+1,Single bed,Dang su dung,Tieu chuan,An uong,Nguyen Van A,
+2,Single bed,Dang su dung,Tieu chuan,Tron goi,Tran Thi B,
 3,Single bed,X,Huong nui,X,X,
 4,Single bed,X,Huong bien,X,X,
-5,Double bed,Dang su dung,X,Don dep,Le Thi C,
-6,Double bed,Da dat,X,Tron goi,Pham Van D,
+5,Double bed,Dang su dung,Tieu chuan,Don dep,Le Thi C,
+6,Double bed,Da dat,Tieu chuan,Tron goi,Pham Van D,
 7,Double bed,Da dat,Huong nui,Don dep,Nguyen Thi E,
 8,Double bed,X,Huong bien,X,X,
 9,Double bed,X,Huong bien,X,X,
@@ -17,4 +17,4 @@
 12,Queen size bed,X,Huong bien,X,X,
 13,King size bed,Da dat,Huong nui,Tron goi,Banh Van G,
 14,King size bed,X,Huong nui,X,X,
-15,King size bed,X,Huong bien,Don dep,X,
+15,King size bed,X,Huong bien,X,X,
