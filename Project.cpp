@@ -134,9 +134,9 @@ class QuanLyPhong{
         }
 
         void out(){
-            for(int i = 0; i < qlp.size(); i++)
-                qlp[i]->InThongTin();
-                cout << endl;
+            //for(int i = 0; i < qlp.size(); i++)
+                qlp[0]->InThongTin();
+                //cout << endl;
         }
 };
 
