@@ -198,7 +198,7 @@ class QuanLyPhong{
 				file.close();
 				cout << "Doc file thanh cong \n";
 			}
-			else cout << "\nFile khong mo duoc";
+			else cout << "File khong mo duoc\n";
         }
 
         void out(){
@@ -232,9 +232,9 @@ class QuanLyPhong{
 				}
                 file << "----------------------------------------------------------------------------------------------------------------------------------------" << endl;
 				file.close();
-				cout << "\nGhi file thanh cong" << endl;
+				cout << "Ghi file thanh cong" << endl;
 			}
-			else cout << "\nFile khong mo duoc" << endl;
+			else cout << "File khong mo duoc" << endl;
 		}
 
         void TimKiemPhong(int check, string name){
@@ -246,13 +246,8 @@ class QuanLyPhong{
                         qlp[i]->out();
                         cout << endl;
                     }
-<<<<<<< HEAD
                 } 
-=======
-                }
                 system("pause");
-                    
->>>>>>> 024e71cc9273cd512241cc732519b5b8378079cd
             }
 
             if(check == 2){ // Tinh trang
@@ -322,20 +317,26 @@ class MenuPhong{
                     case 4: {
                         system("cls");
                         int timKiem;
-                            cout << "Tim kiem phong theo :" << endl;
+                            cout << "=== Tim kiem theo ===" << endl;
                             cout << "1. Loai Phong" << endl;
         		            cout << "2. Tinh trang" << endl;
         		            cout << "3. Huong phong" << endl;
+                            cout << "4. Thoat" << endl;
+                            cout << "=====================" << endl;
+                            cout << "Nhap lua chon cua ban: ";
 
                             cin >> timKiem;
                             switch(timKiem) {
                                 case 1: {
                                     system("cls");
                                     int loaiPhong;
+                                    cout << "=== Chon loai phong ===" << endl;
                                     cout << "1. Single Bed" << endl;
         		                    cout << "2. Double Bed" << endl;
         		                    cout << "3. Queen Size Bed" << endl;
                                     cout << "4. King Size Bed" << endl;
+                                    cout << "=======================" << endl;
+                                    cout << "Nhap lua chon cua ban: ";
 
                                     cin >> loaiPhong;
 
@@ -371,9 +372,12 @@ class MenuPhong{
                                 case 2: {
                                     system("cls");
                                     int tinhTrang;
+                                    cout << "=== Trang thai phong ===" << endl;
                                     cout << "1. Phong trong" << endl;
                                     cout << "2. Da dat" << endl;
                                     cout << "3. Dang su dung" << endl;
+                                    cout << "========================" << endl;
+                                    cout << "Nhap lua chon cua ban: ";
 
                                     cin >> tinhTrang;
                                     switch(tinhTrang) {
@@ -403,9 +407,12 @@ class MenuPhong{
                                 case 3: {
                                     system("cls");
                                     int huongPhong;
+                                    cout << "=== Chon huong phong ===" << endl;
                                     cout << "1. Tieu chuan" << endl;
                                     cout << "2. Huong nui" << endl;
                                     cout << "3. Huong bien" << endl;
+                                    cout << "========================" << endl;
+                                    cout << "Nhap lua chon cua ban: ";
 
                                     cin >> huongPhong;
 
@@ -433,8 +440,13 @@ class MenuPhong{
                                 }
                                 break;
 
+                                case 4:
+                                    system("cls");
+                                    break;
+
                                 default:
-                                    cout << "Khong hop le !!!";
+                                    cout << "Lua chon khong hop le !!!" << endl;
+                                    system("pause");
                                     system("cls");
                                     break;
                             }
@@ -454,16 +466,126 @@ class MenuPhong{
         }
 };
 
+class KhachHang{
+    protected:
+        int maKh, thoiGian, nguoiDiChung;
+        string ten, dienThoai, email, loai, theThanhVien;
+
+    public:
+        void docFile(ifstream &file){
+            file >> maKh;
+            file.ignore();
+            getline(file,ten, ',');
+            getline(file,dienThoai, ',');
+            getline(file,email, ',');
+            getline(file,loai, ',');
+            getline(file,theThanhVien, ',');
+            file >> thoiGian;
+            file.ignore();
+            file >> nguoiDiChung;
+            file.ignore();
+        }
+
+        void InThongTin(){
+            cout << setw(15) << left << maKh;
+            cout << setw(20) << left << ten;
+            cout << setw(20) << left << dienThoai;
+            cout << setw(20) << left << email;
+            cout << setw(20) << left << loai;
+            cout << setw(25) << left << theThanhVien;
+            cout << setw(20) << left << thoiGian;
+            cout << setw(20) << left << nguoiDiChung;
+        }
+
+        void GhiFile(ofstream &file){
+            file << setw(15) << left << maKh;
+            file << setw(20) << left << ten;
+            file << setw(20) << left << dienThoai;
+            file << setw(20) << left << email;
+            file << setw(20) << left << loai;
+            file << setw(25) << left << theThanhVien;
+            file << setw(20) << left << thoiGian;
+            file << setw(20) << left << nguoiDiChung;
+        }
+
+};
+
+class CaNhan : public KhachHang{
+    public:
+
+};
+
+class GiaDinh : public KhachHang{
+
+};
+
+class DoanhNghiep : public KhachHang{
+
+};
+
+class QuanLyKhachHang{
+    private:
+        vector <KhachHang*> kh;
+
+    public:
+        void NhapThongTin(){
+            ifstream file;
+			file.open("Guest.csv");
+
+            if(file.is_open()){
+				int tong, n, m, k;
+				file >> tong;
+                kh.resize(tong);
+                file >> n; file >> m; file >> k;
+                file.ignore(2, '\n');
+                for(int i = 0; i < n; i++)
+                    kh[i] = new CaNhan();
+                for(int i = n; i < n + m; i++)
+                    kh[i] = new GiaDinh();
+                for(int i = n + m; i < n + m + k; i++)
+                    kh[i] = new DoanhNghiep();
+                for(int i = 0; i < kh.size(); i++)
+                    kh[i]->docFile(file);
+				file.close();
+				cout << "Doc file thanh cong \n";
+			}
+			else cout << "File khong mo duoc\n";
+        }
+
+        void out(){
+            //qlp[0]->TieuDe();
+            for(int i = 0; i < kh.size(); i++){
+                kh[i]->InThongTin();
+                cout << endl;
+            }
+            //cout << "----------------------------------------------------------------------------------------------------------------------------------------" << endl;
+            //system("pause");
+        }
+
+        void XuatDanhSach(){
+			ofstream file;
+			
+			file.open("Guest.txt");
+
+			if(file.is_open()){
+				for(int i = 0; i < kh.size(); i++){
+					kh[i]->GhiFile(file);
+                    file << endl;
+				}
+				file.close();
+				cout << "Ghi file thanh cong" << endl;
+			}
+			else cout << "File khong mo duoc" << endl;
+		}
+};
+
 int main(){
     system("cls");
-<<<<<<< HEAD
-    QuanLyPhong ql;
-    ql.NhapThongTin();
-    ql.out();
-    ql.XuatDanhSach();
-    ql.TimKiemPhong("Loai phong", "Double bed");
-=======
-    MenuPhong qlp;
-    qlp.HienThiMenu();
->>>>>>> 024e71cc9273cd512241cc732519b5b8378079cd
+    //MenuPhong qlp;
+    //qlp.HienThiMenu();
+
+    QuanLyKhachHang kh;
+    kh.NhapThongTin();
+    kh.out();
+    kh.XuatDanhSach();
 }
