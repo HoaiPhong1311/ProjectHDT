@@ -339,8 +339,7 @@ class DoanhNghiep : public KhachHang{
 
 class HoaDon{
     private:
-        int maPhong, tongTien = 0;
-        string tenKhachHang;
+        int tongTien = 0;
 
     public:
         void SetTongTien(int tongTien){
